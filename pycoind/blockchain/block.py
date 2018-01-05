@@ -309,7 +309,7 @@ class Database(database.Database):
         # Find the first block that matches
         block = None
         for hash in locator:
-            block = self.get_block(hash)
+            block = self.get(hash)
             if block: break
 
         # no matching block... :'(
@@ -319,7 +319,7 @@ class Database(database.Database):
         # Select the next count rows
         cursor = self._cursor()
         sql = ' where mainchain = 1 and height > ? order by height limit %d' % count
-        cursor.execute(self._SELECT + sql, (block.height, ))
+        cursor.execute(self.sql_select + sql, (block.height, ))
 
         # Wrap the row in the Block object
         blocks = [ ]

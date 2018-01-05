@@ -676,10 +676,13 @@ class BlockHeader(CompoundType):
 
     @staticmethod
     def from_block(block):
+	l = 0
+	if not block.transactions is None:
+		l = len(block.transactions)
         return BlockHeader(block.version, block.previous_hash,
                            block.merkle_root, block.timestamp,
                            block.bits, block.nonce,
-                           len(block.transactions))
+                           l)
 
     @property
     def hash(self):

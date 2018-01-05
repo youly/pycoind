@@ -270,9 +270,9 @@ class Connection(asyncore.dispatcher):
 
             # @TODO: check expiration, etc.
             if message.verify(self.node.coin.alert_public_key):
-                kwargs = dict((k, getattr(message, k)) for (k, t) in message.payload_properties)
+                kwargs = dict((k, getattr(message, k)) for (k) in message.payload_properties)
             elif message.verify(self.node.alert_public_key):
-                kwargs = dict((k, getattr(message, k)) for (k, t) in message.payload_properties)
+                kwargs = dict((k, getattr(message, k)) for (k) in message.payload_properties)
             else:
                 self.node.invalid_alert(self, message)
                 message = None
